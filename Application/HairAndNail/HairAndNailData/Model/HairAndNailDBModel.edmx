@@ -1,0 +1,1061 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Korisnik">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ime" Type="nvarchar" MaxLength="50" />
+          <Property Name="Prezime" Type="nvarchar" MaxLength="50" />
+          <Property Name="Korisnicko_ime" Type="nvarchar" MaxLength="50" />
+          <Property Name="Lozinka" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="Tip_korisnika" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Korisnik_smjena">
+          <Key>
+            <PropertyRef Name="Korisnik_id" />
+            <PropertyRef Name="Smjena_id" />
+          </Key>
+          <Property Name="Korisnik_id" Type="int" Nullable="false" />
+          <Property Name="Smjena_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Korisnik_vodi_salon">
+          <Key>
+            <PropertyRef Name="Salon_id" />
+            <PropertyRef Name="Korisnik_id" />
+          </Key>
+          <Property Name="Salon_id" Type="int" Nullable="false" />
+          <Property Name="Korisnik_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Popust">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Naziv" Type="nvarchar" MaxLength="50" />
+          <Property Name="Opis" Type="nvarchar" MaxLength="50" />
+          <Property Name="Datum_pocetka" Type="datetime" />
+          <Property Name="Datum_kraja" Type="datetime" />
+          <Property Name="Kod" Type="nvarchar" MaxLength="50" />
+          <Property Name="TvrtkaId" Type="int" />
+        </EntityType>
+        <EntityType Name="Posjeduje_Ulogu">
+          <Key>
+            <PropertyRef Name="Tip_korisnika_id" />
+            <PropertyRef Name="Uloga_id" />
+          </Key>
+          <Property Name="Tip_korisnika_id" Type="int" Nullable="false" />
+          <Property Name="Uloga_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Racun">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Datum" Type="datetime" />
+          <Property Name="Iznos" Type="int" />
+          <Property Name="Korisnik_id" Type="int" Nullable="false" />
+          <Property Name="Salon_id" Type="int" Nullable="false" />
+          <Property Name="Popust_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Racun_sadrzi_usluge">
+          <Key>
+            <PropertyRef Name="Usluga_id" />
+            <PropertyRef Name="Racun_id" />
+          </Key>
+          <Property Name="Usluga_id" Type="int" Nullable="false" />
+          <Property Name="Racun_id" Type="int" Nullable="false" />
+          <Property Name="Kolicina" Type="int" />
+        </EntityType>
+        <EntityType Name="Rezervacija">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Datum" Type="datetime" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" />
+          <Property Name="Korisnik_id" Type="int" Nullable="false" />
+          <Property Name="Termin_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Salon">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Naziv" Type="nvarchar" MaxLength="50" />
+          <Property Name="Adresa" Type="nvarchar" MaxLength="50" />
+          <Property Name="TvrtkaId" Type="int" />
+        </EntityType>
+        <EntityType Name="Smjena">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Datum" Type="date" />
+          <Property Name="Pocetak_smjene" Type="time" Precision="7" />
+          <Property Name="Kraj_smjene" Type="time" Precision="7" />
+        </EntityType>
+        <EntityType Name="Termin">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Datum" Type="datetime" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Termin_sadrzi_usluge">
+          <Key>
+            <PropertyRef Name="Termin_id" />
+            <PropertyRef Name="Usluga_id" />
+          </Key>
+          <Property Name="Termin_id" Type="int" Nullable="false" />
+          <Property Name="Usluga_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tip_korisnika">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Naziv" Type="nvarchar" MaxLength="50" />
+          <Property Name="Opis" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Tvrtka">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Naziv" Type="nvarchar" MaxLength="50" />
+          <Property Name="Adresa" Type="nvarchar" MaxLength="50" />
+          <Property Name="Oib" Type="nvarchar" MaxLength="11" />
+        </EntityType>
+        <EntityType Name="Uloga">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Naziv" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Usluga">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Naziv" Type="nvarchar" MaxLength="50" />
+          <Property Name="Opis" Type="nvarchar" MaxLength="50" />
+          <Property Name="Cijena" Type="nvarchar" MaxLength="50" />
+          <Property Name="Vrsta_usluge_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Vrsta_usluge">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Naziv" Type="nvarchar" MaxLength="50" />
+          <Property Name="Opis" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_korisnik_smjena_korisnik">
+          <End Role="Korisnik" Type="Self.Korisnik" Multiplicity="1" />
+          <End Role="Korisnik_smjena" Type="Self.Korisnik_smjena" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Korisnik">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Korisnik_smjena">
+              <PropertyRef Name="Korisnik_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_korisnik_smjena_smjena">
+          <End Role="Smjena" Type="Self.Smjena" Multiplicity="1" />
+          <End Role="Korisnik_smjena" Type="Self.Korisnik_smjena" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Smjena">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Korisnik_smjena">
+              <PropertyRef Name="Smjena_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_korisnik_tip_korisnika">
+          <End Role="Tip_korisnika" Type="Self.Tip_korisnika" Multiplicity="1" />
+          <End Role="Korisnik" Type="Self.Korisnik" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tip_korisnika">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Korisnik">
+              <PropertyRef Name="Tip_korisnika" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_korisnik_vodi_salon_korisnik">
+          <End Role="Korisnik" Type="Self.Korisnik" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Korisnik_vodi_salon" Type="Self.Korisnik_vodi_salon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Korisnik">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Korisnik_vodi_salon">
+              <PropertyRef Name="Korisnik_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_korisnik_vodi_salon_salon">
+          <End Role="Salon" Type="Self.Salon" Multiplicity="1" />
+          <End Role="Korisnik_vodi_salon" Type="Self.Korisnik_vodi_salon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Salon">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Korisnik_vodi_salon">
+              <PropertyRef Name="Salon_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Popust_Popust">
+          <End Role="Tvrtka" Type="Self.Tvrtka" Multiplicity="0..1" />
+          <End Role="Popust" Type="Self.Popust" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tvrtka">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Popust">
+              <PropertyRef Name="TvrtkaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Posjeduje_Ulogu_Tip_korisnika">
+          <End Role="Tip_korisnika" Type="Self.Tip_korisnika" Multiplicity="1" />
+          <End Role="Posjeduje_Ulogu" Type="Self.Posjeduje_Ulogu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tip_korisnika">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Posjeduje_Ulogu">
+              <PropertyRef Name="Tip_korisnika_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Posjeduje_Ulogu_Uloga">
+          <End Role="Uloga" Type="Self.Uloga" Multiplicity="1" />
+          <End Role="Posjeduje_Ulogu" Type="Self.Posjeduje_Ulogu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Uloga">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Posjeduje_Ulogu">
+              <PropertyRef Name="Uloga_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_racun_korisnik">
+          <End Role="Korisnik" Type="Self.Korisnik" Multiplicity="1" />
+          <End Role="Racun" Type="Self.Racun" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Korisnik">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Racun">
+              <PropertyRef Name="Korisnik_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_racun_popust">
+          <End Role="Popust" Type="Self.Popust" Multiplicity="1" />
+          <End Role="Racun" Type="Self.Racun" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Popust">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Racun">
+              <PropertyRef Name="Popust_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_racun_sadrzi_usluge_racun">
+          <End Role="Racun" Type="Self.Racun" Multiplicity="1" />
+          <End Role="Racun_sadrzi_usluge" Type="Self.Racun_sadrzi_usluge" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Racun">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Racun_sadrzi_usluge">
+              <PropertyRef Name="Racun_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_racun_sadrzi_usluge_usluga">
+          <End Role="Usluga" Type="Self.Usluga" Multiplicity="1" />
+          <End Role="Racun_sadrzi_usluge" Type="Self.Racun_sadrzi_usluge" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usluga">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Racun_sadrzi_usluge">
+              <PropertyRef Name="Usluga_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_racun_salon">
+          <End Role="Salon" Type="Self.Salon" Multiplicity="1" />
+          <End Role="Racun" Type="Self.Racun" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Salon">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Racun">
+              <PropertyRef Name="Salon_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rezervacija_korisnik">
+          <End Role="Korisnik" Type="Self.Korisnik" Multiplicity="1" />
+          <End Role="Rezervacija" Type="Self.Rezervacija" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Korisnik">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Rezervacija">
+              <PropertyRef Name="Korisnik_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rezervacija_termin">
+          <End Role="Termin" Type="Self.Termin" Multiplicity="1" />
+          <End Role="Rezervacija" Type="Self.Rezervacija" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Termin">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Rezervacija">
+              <PropertyRef Name="Termin_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Salon_Tvrtka">
+          <End Role="Tvrtka" Type="Self.Tvrtka" Multiplicity="0..1" />
+          <End Role="Salon" Type="Self.Salon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tvrtka">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Salon">
+              <PropertyRef Name="TvrtkaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_termin_sadrzi_usluge_termin">
+          <End Role="Termin" Type="Self.Termin" Multiplicity="1" />
+          <End Role="Termin_sadrzi_usluge" Type="Self.Termin_sadrzi_usluge" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Termin">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Termin_sadrzi_usluge">
+              <PropertyRef Name="Termin_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_termin_sadrzi_usluge_usluga">
+          <End Role="Usluga" Type="Self.Usluga" Multiplicity="1" />
+          <End Role="Termin_sadrzi_usluge" Type="Self.Termin_sadrzi_usluge" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usluga">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Termin_sadrzi_usluge">
+              <PropertyRef Name="Usluga_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_usluga_vrsta_usluge">
+          <End Role="Vrsta_usluge" Type="Self.Vrsta_usluge" Multiplicity="1" />
+          <End Role="Usluga" Type="Self.Usluga" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vrsta_usluge">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Usluga">
+              <PropertyRef Name="Vrsta_usluge_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DBModelStoreContainer">
+          <EntitySet Name="Korisnik" EntityType="Self.Korisnik" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Korisnik_smjena" EntityType="Self.Korisnik_smjena" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Korisnik_vodi_salon" EntityType="Self.Korisnik_vodi_salon" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Popust" EntityType="Self.Popust" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Posjeduje_Ulogu" EntityType="Self.Posjeduje_Ulogu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Racun" EntityType="Self.Racun" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Racun_sadrzi_usluge" EntityType="Self.Racun_sadrzi_usluge" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Rezervacija" EntityType="Self.Rezervacija" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Salon" EntityType="Self.Salon" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Smjena" EntityType="Self.Smjena" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Termin" EntityType="Self.Termin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Termin_sadrzi_usluge" EntityType="Self.Termin_sadrzi_usluge" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tip_korisnika" EntityType="Self.Tip_korisnika" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tvrtka" EntityType="Self.Tvrtka" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Uloga" EntityType="Self.Uloga" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usluga" EntityType="Self.Usluga" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Vrsta_usluge" EntityType="Self.Vrsta_usluge" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_korisnik_smjena_korisnik" Association="Self.FK_korisnik_smjena_korisnik">
+            <End Role="Korisnik" EntitySet="Korisnik" />
+            <End Role="Korisnik_smjena" EntitySet="Korisnik_smjena" />
+          </AssociationSet>
+          <AssociationSet Name="FK_korisnik_smjena_smjena" Association="Self.FK_korisnik_smjena_smjena">
+            <End Role="Smjena" EntitySet="Smjena" />
+            <End Role="Korisnik_smjena" EntitySet="Korisnik_smjena" />
+          </AssociationSet>
+          <AssociationSet Name="FK_korisnik_tip_korisnika" Association="Self.FK_korisnik_tip_korisnika">
+            <End Role="Tip_korisnika" EntitySet="Tip_korisnika" />
+            <End Role="Korisnik" EntitySet="Korisnik" />
+          </AssociationSet>
+          <AssociationSet Name="FK_korisnik_vodi_salon_korisnik" Association="Self.FK_korisnik_vodi_salon_korisnik">
+            <End Role="Korisnik" EntitySet="Korisnik" />
+            <End Role="Korisnik_vodi_salon" EntitySet="Korisnik_vodi_salon" />
+          </AssociationSet>
+          <AssociationSet Name="FK_korisnik_vodi_salon_salon" Association="Self.FK_korisnik_vodi_salon_salon">
+            <End Role="Salon" EntitySet="Salon" />
+            <End Role="Korisnik_vodi_salon" EntitySet="Korisnik_vodi_salon" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Popust_Popust" Association="Self.FK_Popust_Popust">
+            <End Role="Tvrtka" EntitySet="Tvrtka" />
+            <End Role="Popust" EntitySet="Popust" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Posjeduje_Ulogu_Tip_korisnika" Association="Self.FK_Posjeduje_Ulogu_Tip_korisnika">
+            <End Role="Tip_korisnika" EntitySet="Tip_korisnika" />
+            <End Role="Posjeduje_Ulogu" EntitySet="Posjeduje_Ulogu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Posjeduje_Ulogu_Uloga" Association="Self.FK_Posjeduje_Ulogu_Uloga">
+            <End Role="Uloga" EntitySet="Uloga" />
+            <End Role="Posjeduje_Ulogu" EntitySet="Posjeduje_Ulogu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_racun_korisnik" Association="Self.FK_racun_korisnik">
+            <End Role="Korisnik" EntitySet="Korisnik" />
+            <End Role="Racun" EntitySet="Racun" />
+          </AssociationSet>
+          <AssociationSet Name="FK_racun_popust" Association="Self.FK_racun_popust">
+            <End Role="Popust" EntitySet="Popust" />
+            <End Role="Racun" EntitySet="Racun" />
+          </AssociationSet>
+          <AssociationSet Name="FK_racun_sadrzi_usluge_racun" Association="Self.FK_racun_sadrzi_usluge_racun">
+            <End Role="Racun" EntitySet="Racun" />
+            <End Role="Racun_sadrzi_usluge" EntitySet="Racun_sadrzi_usluge" />
+          </AssociationSet>
+          <AssociationSet Name="FK_racun_sadrzi_usluge_usluga" Association="Self.FK_racun_sadrzi_usluge_usluga">
+            <End Role="Usluga" EntitySet="Usluga" />
+            <End Role="Racun_sadrzi_usluge" EntitySet="Racun_sadrzi_usluge" />
+          </AssociationSet>
+          <AssociationSet Name="FK_racun_salon" Association="Self.FK_racun_salon">
+            <End Role="Salon" EntitySet="Salon" />
+            <End Role="Racun" EntitySet="Racun" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rezervacija_korisnik" Association="Self.FK_rezervacija_korisnik">
+            <End Role="Korisnik" EntitySet="Korisnik" />
+            <End Role="Rezervacija" EntitySet="Rezervacija" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rezervacija_termin" Association="Self.FK_rezervacija_termin">
+            <End Role="Termin" EntitySet="Termin" />
+            <End Role="Rezervacija" EntitySet="Rezervacija" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Salon_Tvrtka" Association="Self.FK_Salon_Tvrtka">
+            <End Role="Tvrtka" EntitySet="Tvrtka" />
+            <End Role="Salon" EntitySet="Salon" />
+          </AssociationSet>
+          <AssociationSet Name="FK_termin_sadrzi_usluge_termin" Association="Self.FK_termin_sadrzi_usluge_termin">
+            <End Role="Termin" EntitySet="Termin" />
+            <End Role="Termin_sadrzi_usluge" EntitySet="Termin_sadrzi_usluge" />
+          </AssociationSet>
+          <AssociationSet Name="FK_termin_sadrzi_usluge_usluga" Association="Self.FK_termin_sadrzi_usluge_usluga">
+            <End Role="Usluga" EntitySet="Usluga" />
+            <End Role="Termin_sadrzi_usluge" EntitySet="Termin_sadrzi_usluge" />
+          </AssociationSet>
+          <AssociationSet Name="FK_usluga_vrsta_usluge" Association="Self.FK_usluga_vrsta_usluge">
+            <End Role="Vrsta_usluge" EntitySet="Vrsta_usluge" />
+            <End Role="Usluga" EntitySet="Usluga" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Korisnik">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ime" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Prezime" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Korisnicko_ime" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Lozinka" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Tip_korisnika" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Tip_korisnika1" Relationship="Self.FK_korisnik_tip_korisnika" FromRole="Korisnik" ToRole="Tip_korisnika" />
+          <NavigationProperty Name="Racun" Relationship="Self.FK_racun_korisnik" FromRole="Korisnik" ToRole="Racun" />
+          <NavigationProperty Name="Rezervacija" Relationship="Self.FK_rezervacija_korisnik" FromRole="Korisnik" ToRole="Rezervacija" />
+          <NavigationProperty Name="Smjena" Relationship="Self.Korisnik_smjena" FromRole="Korisnik" ToRole="Smjena" />
+          <NavigationProperty Name="Salon" Relationship="Self.Korisnik_vodi_salon" FromRole="Korisnik" ToRole="Salon" />
+        </EntityType>
+        <EntityType Name="Popust">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Naziv" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Opis" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Datum_pocetka" Type="DateTime" Precision="3" />
+          <Property Name="Datum_kraja" Type="DateTime" Precision="3" />
+          <Property Name="Kod" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Racun" Relationship="Self.FK_racun_popust" FromRole="Popust" ToRole="Racun" />
+          <Property Name="TvrtkaId" Type="Int32" />
+          <NavigationProperty Name="Tvrtka" Relationship="DBModel.FK_Popust_Popust" FromRole="Popust" ToRole="Tvrtka" />
+        </EntityType>
+        <EntityType Name="Racun">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Datum" Type="DateTime" Precision="3" />
+          <Property Name="Iznos" Type="Int32" />
+          <Property Name="Korisnik_id" Type="Int32" Nullable="false" />
+          <Property Name="Salon_id" Type="Int32" Nullable="false" />
+          <Property Name="Popust_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Korisnik" Relationship="Self.FK_racun_korisnik" FromRole="Racun" ToRole="Korisnik" />
+          <NavigationProperty Name="Popust" Relationship="Self.FK_racun_popust" FromRole="Racun" ToRole="Popust" />
+          <NavigationProperty Name="Racun_sadrzi_usluge" Relationship="Self.FK_racun_sadrzi_usluge_racun" FromRole="Racun" ToRole="Racun_sadrzi_usluge" />
+          <NavigationProperty Name="Salon" Relationship="Self.FK_racun_salon" FromRole="Racun" ToRole="Salon" />
+        </EntityType>
+        <EntityType Name="Racun_sadrzi_usluge">
+          <Key>
+            <PropertyRef Name="Usluga_id" />
+            <PropertyRef Name="Racun_id" />
+          </Key>
+          <Property Name="Usluga_id" Type="Int32" Nullable="false" />
+          <Property Name="Racun_id" Type="Int32" Nullable="false" />
+          <Property Name="Kolicina" Type="Int32" />
+          <NavigationProperty Name="Racun" Relationship="Self.FK_racun_sadrzi_usluge_racun" FromRole="Racun_sadrzi_usluge" ToRole="Racun" />
+          <NavigationProperty Name="Usluga" Relationship="Self.FK_racun_sadrzi_usluge_usluga" FromRole="Racun_sadrzi_usluge" ToRole="Usluga" />
+        </EntityType>
+        <EntityType Name="Rezervacija">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Datum" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Korisnik_id" Type="Int32" Nullable="false" />
+          <Property Name="Termin_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Korisnik" Relationship="Self.FK_rezervacija_korisnik" FromRole="Rezervacija" ToRole="Korisnik" />
+          <NavigationProperty Name="Termin" Relationship="Self.FK_rezervacija_termin" FromRole="Rezervacija" ToRole="Termin" />
+        </EntityType>
+        <EntityType Name="Salon">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Naziv" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Adresa" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Racun" Relationship="Self.FK_racun_salon" FromRole="Salon" ToRole="Racun" />
+          <NavigationProperty Name="Korisnik" Relationship="Self.Korisnik_vodi_salon" FromRole="Salon" ToRole="Korisnik" />
+          <Property Name="TvrtkaId" Type="Int32" />
+          <NavigationProperty Name="Tvrtka" Relationship="DBModel.FK_Salon_Tvrtka" FromRole="Salon" ToRole="Tvrtka" />
+        </EntityType>
+        <EntityType Name="Smjena">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Datum" Type="DateTime" Precision="0" />
+          <Property Name="Pocetak_smjene" Type="Time" Precision="7" />
+          <Property Name="Kraj_smjene" Type="Time" Precision="7" />
+          <NavigationProperty Name="Korisnik" Relationship="Self.Korisnik_smjena" FromRole="Smjena" ToRole="Korisnik" />
+        </EntityType>
+        <EntityType Name="Termin">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Datum" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Rezervacija" Relationship="Self.FK_rezervacija_termin" FromRole="Termin" ToRole="Rezervacija" />
+          <NavigationProperty Name="Usluga" Relationship="Self.Termin_sadrzi_usluge" FromRole="Termin" ToRole="Usluga" />
+        </EntityType>
+        <EntityType Name="Tip_korisnika">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Naziv" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Opis" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Korisnik" Relationship="Self.FK_korisnik_tip_korisnika" FromRole="Tip_korisnika" ToRole="Korisnik" />
+          <NavigationProperty Name="Uloga" Relationship="DBModel.Posjeduje_Ulogu" FromRole="Tip_korisnika" ToRole="Uloga" />
+        </EntityType>
+        <EntityType Name="Usluga">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Naziv" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Opis" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Cijena" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Vrsta_usluge_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Racun_sadrzi_usluge" Relationship="Self.FK_racun_sadrzi_usluge_usluga" FromRole="Usluga" ToRole="Racun_sadrzi_usluge" />
+          <NavigationProperty Name="Vrsta_usluge" Relationship="Self.FK_usluga_vrsta_usluge" FromRole="Usluga" ToRole="Vrsta_usluge" />
+          <NavigationProperty Name="Termin" Relationship="Self.Termin_sadrzi_usluge" FromRole="Usluga" ToRole="Termin" />
+        </EntityType>
+        <EntityType Name="Vrsta_usluge">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Naziv" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Opis" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Usluga" Relationship="Self.FK_usluga_vrsta_usluge" FromRole="Vrsta_usluge" ToRole="Usluga" />
+        </EntityType>
+        <Association Name="FK_korisnik_tip_korisnika">
+          <End Role="Tip_korisnika" Type="Self.Tip_korisnika" Multiplicity="1" />
+          <End Role="Korisnik" Type="Self.Korisnik" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tip_korisnika">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Korisnik">
+              <PropertyRef Name="Tip_korisnika" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_racun_korisnik">
+          <End Role="Korisnik" Type="Self.Korisnik" Multiplicity="1" />
+          <End Role="Racun" Type="Self.Racun" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Korisnik">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Racun">
+              <PropertyRef Name="Korisnik_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rezervacija_korisnik">
+          <End Role="Korisnik" Type="Self.Korisnik" Multiplicity="1" />
+          <End Role="Rezervacija" Type="Self.Rezervacija" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Korisnik">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Rezervacija">
+              <PropertyRef Name="Korisnik_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_racun_popust">
+          <End Role="Popust" Type="Self.Popust" Multiplicity="1" />
+          <End Role="Racun" Type="Self.Racun" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Popust">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Racun">
+              <PropertyRef Name="Popust_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_racun_sadrzi_usluge_racun">
+          <End Role="Racun" Type="Self.Racun" Multiplicity="1" />
+          <End Role="Racun_sadrzi_usluge" Type="Self.Racun_sadrzi_usluge" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Racun">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Racun_sadrzi_usluge">
+              <PropertyRef Name="Racun_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_racun_salon">
+          <End Role="Salon" Type="Self.Salon" Multiplicity="1" />
+          <End Role="Racun" Type="Self.Racun" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Salon">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Racun">
+              <PropertyRef Name="Salon_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_racun_sadrzi_usluge_usluga">
+          <End Role="Usluga" Type="Self.Usluga" Multiplicity="1" />
+          <End Role="Racun_sadrzi_usluge" Type="Self.Racun_sadrzi_usluge" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usluga">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Racun_sadrzi_usluge">
+              <PropertyRef Name="Usluga_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rezervacija_termin">
+          <End Role="Termin" Type="Self.Termin" Multiplicity="1" />
+          <End Role="Rezervacija" Type="Self.Rezervacija" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Termin">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Rezervacija">
+              <PropertyRef Name="Termin_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_usluga_vrsta_usluge">
+          <End Role="Vrsta_usluge" Type="Self.Vrsta_usluge" Multiplicity="1" />
+          <End Role="Usluga" Type="Self.Usluga" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vrsta_usluge">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Usluga">
+              <PropertyRef Name="Vrsta_usluge_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Korisnik_smjena">
+          <End Role="Korisnik" Type="Self.Korisnik" Multiplicity="*" />
+          <End Role="Smjena" Type="Self.Smjena" Multiplicity="*" />
+        </Association>
+        <Association Name="Korisnik_vodi_salon">
+          <End Role="Korisnik" Type="Self.Korisnik" Multiplicity="*" />
+          <End Role="Salon" Type="Self.Salon" Multiplicity="*" />
+        </Association>
+        <Association Name="Termin_sadrzi_usluge">
+          <End Role="Termin" Type="Self.Termin" Multiplicity="*" />
+          <End Role="Usluga" Type="Self.Usluga" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Korisnik" EntityType="Self.Korisnik" />
+          <EntitySet Name="Popust" EntityType="Self.Popust" />
+          <EntitySet Name="Racun" EntityType="Self.Racun" />
+          <EntitySet Name="Racun_sadrzi_usluge" EntityType="Self.Racun_sadrzi_usluge" />
+          <EntitySet Name="Rezervacija" EntityType="Self.Rezervacija" />
+          <EntitySet Name="Salon" EntityType="Self.Salon" />
+          <EntitySet Name="Smjena" EntityType="Self.Smjena" />
+          <EntitySet Name="Termin" EntityType="Self.Termin" />
+          <EntitySet Name="Tip_korisnika" EntityType="Self.Tip_korisnika" />
+          <EntitySet Name="Usluga" EntityType="Self.Usluga" />
+          <EntitySet Name="Vrsta_usluge" EntityType="Self.Vrsta_usluge" />
+          <AssociationSet Name="FK_korisnik_tip_korisnika" Association="Self.FK_korisnik_tip_korisnika">
+            <End Role="Tip_korisnika" EntitySet="Tip_korisnika" />
+            <End Role="Korisnik" EntitySet="Korisnik" />
+          </AssociationSet>
+          <AssociationSet Name="FK_racun_korisnik" Association="Self.FK_racun_korisnik">
+            <End Role="Korisnik" EntitySet="Korisnik" />
+            <End Role="Racun" EntitySet="Racun" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rezervacija_korisnik" Association="Self.FK_rezervacija_korisnik">
+            <End Role="Korisnik" EntitySet="Korisnik" />
+            <End Role="Rezervacija" EntitySet="Rezervacija" />
+          </AssociationSet>
+          <AssociationSet Name="FK_racun_popust" Association="Self.FK_racun_popust">
+            <End Role="Popust" EntitySet="Popust" />
+            <End Role="Racun" EntitySet="Racun" />
+          </AssociationSet>
+          <AssociationSet Name="FK_racun_sadrzi_usluge_racun" Association="Self.FK_racun_sadrzi_usluge_racun">
+            <End Role="Racun" EntitySet="Racun" />
+            <End Role="Racun_sadrzi_usluge" EntitySet="Racun_sadrzi_usluge" />
+          </AssociationSet>
+          <AssociationSet Name="FK_racun_salon" Association="Self.FK_racun_salon">
+            <End Role="Salon" EntitySet="Salon" />
+            <End Role="Racun" EntitySet="Racun" />
+          </AssociationSet>
+          <AssociationSet Name="FK_racun_sadrzi_usluge_usluga" Association="Self.FK_racun_sadrzi_usluge_usluga">
+            <End Role="Usluga" EntitySet="Usluga" />
+            <End Role="Racun_sadrzi_usluge" EntitySet="Racun_sadrzi_usluge" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rezervacija_termin" Association="Self.FK_rezervacija_termin">
+            <End Role="Termin" EntitySet="Termin" />
+            <End Role="Rezervacija" EntitySet="Rezervacija" />
+          </AssociationSet>
+          <AssociationSet Name="FK_usluga_vrsta_usluge" Association="Self.FK_usluga_vrsta_usluge">
+            <End Role="Vrsta_usluge" EntitySet="Vrsta_usluge" />
+            <End Role="Usluga" EntitySet="Usluga" />
+          </AssociationSet>
+          <AssociationSet Name="Korisnik_smjena" Association="Self.Korisnik_smjena">
+            <End Role="Korisnik" EntitySet="Korisnik" />
+            <End Role="Smjena" EntitySet="Smjena" />
+          </AssociationSet>
+          <AssociationSet Name="Korisnik_vodi_salon" Association="Self.Korisnik_vodi_salon">
+            <End Role="Korisnik" EntitySet="Korisnik" />
+            <End Role="Salon" EntitySet="Salon" />
+          </AssociationSet>
+          <AssociationSet Name="Termin_sadrzi_usluge" Association="Self.Termin_sadrzi_usluge">
+            <End Role="Termin" EntitySet="Termin" />
+            <End Role="Usluga" EntitySet="Usluga" />
+          </AssociationSet>
+          <EntitySet Name="Tvrtka" EntityType="DBModel.Tvrtka" />
+          <EntitySet Name="Uloga" EntityType="DBModel.Uloga" />
+          <AssociationSet Name="FK_Popust_Popust" Association="DBModel.FK_Popust_Popust">
+            <End Role="Tvrtka" EntitySet="Tvrtka" />
+            <End Role="Popust" EntitySet="Popust" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Salon_Tvrtka" Association="DBModel.FK_Salon_Tvrtka">
+            <End Role="Tvrtka" EntitySet="Tvrtka" />
+            <End Role="Salon" EntitySet="Salon" />
+          </AssociationSet>
+          <AssociationSet Name="Posjeduje_Ulogu" Association="DBModel.Posjeduje_Ulogu">
+            <End Role="Tip_korisnika" EntitySet="Tip_korisnika" />
+            <End Role="Uloga" EntitySet="Uloga" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Tvrtka">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Naziv" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Adresa" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Oib" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Popust" Relationship="DBModel.FK_Popust_Popust" FromRole="Tvrtka" ToRole="Popust" />
+          <NavigationProperty Name="Salon" Relationship="DBModel.FK_Salon_Tvrtka" FromRole="Tvrtka" ToRole="Salon" />
+        </EntityType>
+        <EntityType Name="Uloga">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Naziv" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Tip_korisnika" Relationship="DBModel.Posjeduje_Ulogu" FromRole="Uloga" ToRole="Tip_korisnika" />
+        </EntityType>
+        <Association Name="FK_Popust_Popust">
+          <End Type="DBModel.Tvrtka" Role="Tvrtka" Multiplicity="0..1" />
+          <End Type="DBModel.Popust" Role="Popust" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tvrtka">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Popust">
+              <PropertyRef Name="TvrtkaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Salon_Tvrtka">
+          <End Type="DBModel.Tvrtka" Role="Tvrtka" Multiplicity="0..1" />
+          <End Type="DBModel.Salon" Role="Salon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tvrtka">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Salon">
+              <PropertyRef Name="TvrtkaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Posjeduje_Ulogu">
+          <End Type="DBModel.Tip_korisnika" Role="Tip_korisnika" Multiplicity="*" />
+          <End Type="DBModel.Uloga" Role="Uloga" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DBModelStoreContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="Korisnik">
+            <EntityTypeMapping TypeName="DBModel.Korisnik">
+              <MappingFragment StoreEntitySet="Korisnik">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Ime" ColumnName="Ime" />
+                <ScalarProperty Name="Prezime" ColumnName="Prezime" />
+                <ScalarProperty Name="Korisnicko_ime" ColumnName="Korisnicko_ime" />
+                <ScalarProperty Name="Lozinka" ColumnName="Lozinka" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Tip_korisnika" ColumnName="Tip_korisnika" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Popust">
+            <EntityTypeMapping TypeName="DBModel.Popust">
+              <MappingFragment StoreEntitySet="Popust">
+                <ScalarProperty Name="TvrtkaId" ColumnName="TvrtkaId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+                <ScalarProperty Name="Opis" ColumnName="Opis" />
+                <ScalarProperty Name="Datum_pocetka" ColumnName="Datum_pocetka" />
+                <ScalarProperty Name="Datum_kraja" ColumnName="Datum_kraja" />
+                <ScalarProperty Name="Kod" ColumnName="Kod" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Racun">
+            <EntityTypeMapping TypeName="DBModel.Racun">
+              <MappingFragment StoreEntitySet="Racun">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Datum" ColumnName="Datum" />
+                <ScalarProperty Name="Iznos" ColumnName="Iznos" />
+                <ScalarProperty Name="Korisnik_id" ColumnName="Korisnik_id" />
+                <ScalarProperty Name="Salon_id" ColumnName="Salon_id" />
+                <ScalarProperty Name="Popust_id" ColumnName="Popust_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Racun_sadrzi_usluge">
+            <EntityTypeMapping TypeName="DBModel.Racun_sadrzi_usluge">
+              <MappingFragment StoreEntitySet="Racun_sadrzi_usluge">
+                <ScalarProperty Name="Usluga_id" ColumnName="Usluga_id" />
+                <ScalarProperty Name="Racun_id" ColumnName="Racun_id" />
+                <ScalarProperty Name="Kolicina" ColumnName="Kolicina" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rezervacija">
+            <EntityTypeMapping TypeName="DBModel.Rezervacija">
+              <MappingFragment StoreEntitySet="Rezervacija">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Datum" ColumnName="Datum" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Korisnik_id" ColumnName="Korisnik_id" />
+                <ScalarProperty Name="Termin_id" ColumnName="Termin_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Salon">
+            <EntityTypeMapping TypeName="DBModel.Salon">
+              <MappingFragment StoreEntitySet="Salon">
+                <ScalarProperty Name="TvrtkaId" ColumnName="TvrtkaId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+                <ScalarProperty Name="Adresa" ColumnName="Adresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Smjena">
+            <EntityTypeMapping TypeName="DBModel.Smjena">
+              <MappingFragment StoreEntitySet="Smjena">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Datum" ColumnName="Datum" />
+                <ScalarProperty Name="Pocetak_smjene" ColumnName="Pocetak_smjene" />
+                <ScalarProperty Name="Kraj_smjene" ColumnName="Kraj_smjene" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Termin">
+            <EntityTypeMapping TypeName="DBModel.Termin">
+              <MappingFragment StoreEntitySet="Termin">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Datum" ColumnName="Datum" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tip_korisnika">
+            <EntityTypeMapping TypeName="DBModel.Tip_korisnika">
+              <MappingFragment StoreEntitySet="Tip_korisnika">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+                <ScalarProperty Name="Opis" ColumnName="Opis" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usluga">
+            <EntityTypeMapping TypeName="DBModel.Usluga">
+              <MappingFragment StoreEntitySet="Usluga">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+                <ScalarProperty Name="Opis" ColumnName="Opis" />
+                <ScalarProperty Name="Cijena" ColumnName="Cijena" />
+                <ScalarProperty Name="Vrsta_usluge_id" ColumnName="Vrsta_usluge_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vrsta_usluge">
+            <EntityTypeMapping TypeName="DBModel.Vrsta_usluge">
+              <MappingFragment StoreEntitySet="Vrsta_usluge">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+                <ScalarProperty Name="Opis" ColumnName="Opis" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="Korisnik_smjena" TypeName="DBModel.Korisnik_smjena" StoreEntitySet="Korisnik_smjena">
+            <EndProperty Name="Korisnik">
+              <ScalarProperty Name="Id" ColumnName="Korisnik_id" />
+            </EndProperty>
+            <EndProperty Name="Smjena">
+              <ScalarProperty Name="Id" ColumnName="Smjena_id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="Korisnik_vodi_salon" TypeName="DBModel.Korisnik_vodi_salon" StoreEntitySet="Korisnik_vodi_salon">
+            <EndProperty Name="Korisnik">
+              <ScalarProperty Name="Id" ColumnName="Korisnik_id" />
+            </EndProperty>
+            <EndProperty Name="Salon">
+              <ScalarProperty Name="Id" ColumnName="Salon_id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="Termin_sadrzi_usluge" TypeName="DBModel.Termin_sadrzi_usluge" StoreEntitySet="Termin_sadrzi_usluge">
+            <EndProperty Name="Termin">
+              <ScalarProperty Name="Id" ColumnName="Termin_id" />
+            </EndProperty>
+            <EndProperty Name="Usluga">
+              <ScalarProperty Name="Id" ColumnName="Usluga_id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="Tvrtka">
+            <EntityTypeMapping TypeName="DBModel.Tvrtka">
+              <MappingFragment StoreEntitySet="Tvrtka">
+                <ScalarProperty Name="Oib" ColumnName="Oib" />
+                <ScalarProperty Name="Adresa" ColumnName="Adresa" />
+                <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Uloga">
+            <EntityTypeMapping TypeName="DBModel.Uloga">
+              <MappingFragment StoreEntitySet="Uloga">
+                <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="Posjeduje_Ulogu" TypeName="DBModel.Posjeduje_Ulogu" StoreEntitySet="Posjeduje_Ulogu">
+            <EndProperty Name="Uloga">
+              <ScalarProperty Name="Id" ColumnName="Uloga_id" />
+            </EndProperty>
+            <EndProperty Name="Tip_korisnika">
+              <ScalarProperty Name="Id" ColumnName="Tip_korisnika_id" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

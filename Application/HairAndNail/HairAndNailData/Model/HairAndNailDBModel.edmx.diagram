@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="7aa509d54fa8403680fc4b1f3b511fa2" Name="Diagram1">
+        <EntityTypeShape EntityType="DBModel.Korisnik" Width="1.5" PointX="3" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBModel.Popust" Width="1.5" PointX="5.875" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBModel.Racun" Width="1.5" PointX="7.5" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBModel.Racun_sadrzi_usluge" Width="1.5" PointX="9.75" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBModel.Rezervacija" Width="1.5" PointX="5.25" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBModel.Salon" Width="1.5" PointX="5.25" PointY="11.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBModel.Smjena" Width="1.5" PointX="5.25" PointY="14.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBModel.Termin" Width="1.5" PointX="3" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBModel.Tip_korisnika" Width="1.5" PointX="0.75" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBModel.Usluga" Width="1.5" PointX="7.5" PointY="17.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBModel.Vrsta_usluge" Width="1.5" PointX="5.25" PointY="17.625" IsExpanded="true" />
+        <AssociationConnector Association="DBModel.FK_korisnik_tip_korisnika" ManuallyRouted="false" />
+        <AssociationConnector Association="DBModel.FK_racun_korisnik" ManuallyRouted="false" />
+        <AssociationConnector Association="DBModel.FK_rezervacija_korisnik" ManuallyRouted="false" />
+        <AssociationConnector Association="DBModel.FK_racun_popust" ManuallyRouted="false" />
+        <AssociationConnector Association="DBModel.FK_racun_sadrzi_usluge_racun" ManuallyRouted="false" />
+        <AssociationConnector Association="DBModel.FK_racun_salon" ManuallyRouted="false" />
+        <AssociationConnector Association="DBModel.FK_racun_sadrzi_usluge_usluga" ManuallyRouted="false" />
+        <AssociationConnector Association="DBModel.FK_rezervacija_termin" ManuallyRouted="false" />
+        <AssociationConnector Association="DBModel.FK_usluga_vrsta_usluge" ManuallyRouted="false" />
+        <AssociationConnector Association="DBModel.Korisnik_smjena" ManuallyRouted="false" />
+        <AssociationConnector Association="DBModel.Korisnik_vodi_salon" ManuallyRouted="false" />
+        <AssociationConnector Association="DBModel.Termin_sadrzi_usluge" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="DBModel.Tvrtka" Width="1.5" PointX="3" PointY="11.375" />
+        <EntityTypeShape EntityType="DBModel.Uloga" Width="1.5" PointX="7.875" PointY="0.625" />
+        <AssociationConnector Association="DBModel.FK_Popust_Popust" />
+        <AssociationConnector Association="DBModel.FK_Salon_Tvrtka" />
+        <AssociationConnector Association="DBModel.Posjeduje_Ulogu" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
