@@ -1,2 +1,2 @@
 # PIProject-HairAndNail
- Windows from application for hair and nail salons
+ Windows formm application for hair and nail salons.
